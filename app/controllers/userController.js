@@ -29,3 +29,13 @@ exports.login = async (req, res) => {
 
     res.json({ token });
 };
+// Get all users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, 'username role'); // fetch all users, only username & role
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch users" });
+  }
+};
